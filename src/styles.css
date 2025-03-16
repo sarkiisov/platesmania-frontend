@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Plate';
+  src: url('./assets/fonts/plate.ttf');
+}
+
+.plate {
+  font-family: 'Plate', sans-serif;
+}
