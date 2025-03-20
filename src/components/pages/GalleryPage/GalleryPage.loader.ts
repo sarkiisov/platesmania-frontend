@@ -1,6 +1,10 @@
-import { Card } from '@/types'
-import { api } from '@/utils'
+import { getCards } from '@/api'
+import { LoaderFunctionArgs } from 'react-router'
 
-export const galleyPageLoader = async () => {
-  return (await api('/gallery').then(({ data }) => data)) as Card[]
+export const galleyPageLoader = async ({ request }: LoaderFunctionArgs) => {
+  const { searchParams } = new URL(request.url)
+
+  const search = searchParams.get('search') ?? null
+
+  return await getCards(search)
 }

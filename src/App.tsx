@@ -1,19 +1,41 @@
-import { createBrowserRouter, RouterProvider } from 'react-router'
-import { AddPage, EditPage, GalleryPage, galleyPageLoader } from './components/pages'
+import { createBrowserRouter, redirect, RouterProvider } from 'react-router'
+import {
+  AddPage,
+  EditPage,
+  editPageLoader,
+  GalleryPage,
+  galleyPageLoader
+} from './components/pages'
+import { FormLayout, GalleryLayout } from './layouts'
 
 const router = createBrowserRouter([
   {
-    path: '/gallery',
-    loader: galleyPageLoader,
-    element: <GalleryPage />
+    path: '/',
+    loader: () => redirect('/gallery')
   },
   {
-    path: '/gallery/add',
-    element: <AddPage />
+    element: <GalleryLayout />,
+    children: [
+      {
+        path: '/gallery',
+        loader: galleyPageLoader,
+        element: <GalleryPage />
+      }
+    ]
   },
   {
-    path: '/gallery/:id/edit',
-    element: <EditPage />
+    element: <FormLayout />,
+    children: [
+      {
+        path: '/gallery/add',
+        element: <AddPage />
+      },
+      {
+        path: '/gallery/:id/edit',
+        loader: editPageLoader,
+        element: <EditPage />
+      }
+    ]
   }
 ])
 

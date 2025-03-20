@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+@theme {
+  --font-sans: 'Open Sans', sans-serif;
+}
+
 @font-face {
   font-family: 'Plate';
   src: url('./assets/fonts/plate.ttf');
