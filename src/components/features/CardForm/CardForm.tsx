@@ -83,7 +83,7 @@ const CardFormBody = () => {
           <input type="hidden" {...register('image')} />
           <input {...getInputProps()} />
           <div className="flex h-64 items-center justify-center">
-            {defaultValues?.image || imageUrl ? (
+            {imageUrl ? (
               <img className="mx-auto h-full w-auto object-contain" src={imageUrl} />
             ) : (
               <p className="text-sm font-medium text-neutral-500">
