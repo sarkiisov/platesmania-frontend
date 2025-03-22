@@ -12,3 +12,15 @@
 .plate {
   font-family: 'Plate', sans-serif;
 }
+
+.Toastify__toast {
+  @apply w-96 text-black;
+}
+
+.Toastify__toast-icon {
+  @apply relative h-6 w-fit;
+}
+
+.indicator {
+  @apply h-full w-1.5 rounded;
+}

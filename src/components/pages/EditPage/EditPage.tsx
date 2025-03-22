@@ -4,6 +4,7 @@ import { editPageLoader } from './EditPage.loader'
 import { DefaultValues } from 'react-hook-form'
 import { Button } from '@/components/ui'
 import { deleteCard, updateCard } from '@/api'
+import { toast } from 'react-toastify'
 
 export const EditPage = () => {
   const card = useLoaderData() as Awaited<ReturnType<typeof editPageLoader>>
@@ -24,7 +25,13 @@ export const EditPage = () => {
     const confirmed = window.confirm('Вы действительно хотите удалить карточку?')
     if (!confirmed) return
 
-    await deleteCard(id)
+    await deleteCard(id).catch((err) => {
+      toast.error('Ошибка при удалении карточки')
+      throw err
+    })
+
+    toast.success('Карточка удалена')
+
     navigate('/gallery')
   }
 

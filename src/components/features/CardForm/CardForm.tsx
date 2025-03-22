@@ -6,7 +6,8 @@ import { useDropzone } from 'react-dropzone'
 import { ErrorMessage } from '@hookform/error-message'
 import { CardFormSchema } from './CardForm.schema'
 import { Button } from '@/components/ui'
-import { uploadImage, fetchImage } from '@/api'
+import { uploadImage, getImage } from '@/api'
+import { toast } from 'react-toastify'
 
 export const CardForm = ({ defaultValues, onSubmit, children }: CardFormProps) => {
   const form = useForm<CardFormData>({
@@ -32,7 +33,10 @@ const CardFormBody = () => {
 
   const handleImageDrop = useCallback(
     async ([file]: File[]) => {
-      const { id, url } = await uploadImage(file)
+      const { id, url } = await uploadImage(file).catch((err) => {
+        toast.error('Ошибка при загрузке изображения')
+        throw err
+      })
 
       setValue('image', id, { shouldDirty: true, shouldValidate: true })
       setImageUrl(url)
@@ -49,7 +53,7 @@ const CardFormBody = () => {
   useEffect(() => {
     if (!defaultValues?.image) return
 
-    fetchImage(defaultValues.image).then(({ url }) => setImageUrl(url))
+    getImage(defaultValues.image).then(({ url }) => setImageUrl(url))
   }, [defaultValues?.image])
 
   return (
