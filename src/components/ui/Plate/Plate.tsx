@@ -24,7 +24,7 @@ export const Plate = ({ plate, className, ...props }: PlateProps) => {
         <div className="text-lg leading-4 text-black">{region}</div>
         <div className="flex items-center gap-0.5">
           <span className="text-xs leading-2 font-medium">RUS</span>
-          <div className="h-2 w-3 border border-black">
+          <div role="presentation" className="h-2 w-3 border border-black">
             <div className="h-1/3 bg-white"></div>
             <div className="h-1/3 bg-blue-500"></div>
             <div className="h-1/3 bg-red-500"></div>

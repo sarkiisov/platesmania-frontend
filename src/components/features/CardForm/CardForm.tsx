@@ -81,7 +81,7 @@ const CardFormBody = () => {
           className="cursor-pointer rounded border-2 border-dashed border-neutral-300 p-4 transition-colors hover:bg-neutral-100"
         >
           <input type="hidden" {...register('image')} />
-          <input {...getInputProps()} />
+          <input {...getInputProps()} id="image" />
           <div className="flex h-64 items-center justify-center">
             {imageUrl ? (
               <img className="mx-auto h-full w-auto object-contain" src={imageUrl} />
