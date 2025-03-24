@@ -6,7 +6,10 @@ import { cn } from '@/utils'
 export const Card = ({ plate, image, createdAt, className, ...props }: CardProps) => {
   return (
     <div
-      className={cn('overflow-hidden rounded-md border border-gray-200 shadow-xs', className)}
+      className={cn(
+        'overflow-hidden rounded-md border border-gray-200 shadow-xs transition-shadow hover:shadow-md',
+        className
+      )}
       {...props}
     >
       <img src={image.url} className="aspect-3/2 w-full object-cover" />
