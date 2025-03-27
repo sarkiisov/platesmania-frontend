@@ -17,7 +17,13 @@ export const EditPage = () => {
   }
 
   const handleFormSubmit = async (data: CardFormData) => {
-    await updateCard(card.id, data)
+    await updateCard(card.id, data).catch((err) => {
+      toast.error('Ошибка при изменении карточки')
+      throw err
+    })
+
+    toast.success('Карточка изменена')
+
     navigate('/gallery')
   }
 
