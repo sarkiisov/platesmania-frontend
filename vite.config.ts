@@ -6,13 +6,14 @@ import tailwindcss from '@tailwindcss/vite'
 import importMetaEnv from '@import-meta-env/unplugin'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     tsconfigPaths(),
     tailwindcss(),
-    importMetaEnv.vite({ example: '.env.example' })
-  ],
+    // Only apply importMetaEnv when not testing
+    mode !== 'test' && importMetaEnv.vite({ example: '.env.example' })
+  ].filter(Boolean),
   test: {
     watch: false,
     globals: true,
@@ -24,4 +25,4 @@ export default defineConfig({
       exclude: ['**/index.ts']
     }
   }
-})
+}))
