@@ -1,0 +1,9 @@
+.git/
+.github/
+coverage/
+dist/
+node_modules/
+.pnpm/
+.gitignore
+.env
+README.md
