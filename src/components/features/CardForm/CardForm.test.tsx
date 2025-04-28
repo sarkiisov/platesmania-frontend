@@ -4,8 +4,8 @@ import { CardForm } from './CardForm'
 import { uploadImage } from '@/api'
 
 vi.mock('@/api', () => ({
-  uploadImage: vi.fn().mockResolvedValue({ id: 'mock-id', url: 'mock-url' }),
-  getImage: vi.fn().mockResolvedValue({ url: 'mock-url' })
+  uploadImage: vi.fn().mockResolvedValue({ id: 'mock-id', url: 'http://mock-url.com' }),
+  getImage: vi.fn().mockResolvedValue({ url: 'http://mock-url.com' })
 }))
 
 describe('CardForm component', () => {
