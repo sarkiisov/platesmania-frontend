@@ -39,7 +39,7 @@ const CardFormBody = () => {
       })
 
       setValue('image', id, { shouldDirty: true, shouldValidate: true })
-      setImageUrl(url)
+      setImageUrl(new URL(url, import.meta.env.VITE_BACKEND_API_URL).href)
     },
     [setValue]
   )
@@ -53,7 +53,9 @@ const CardFormBody = () => {
   useEffect(() => {
     if (!defaultValues?.image) return
 
-    getImage(defaultValues.image).then(({ url }) => setImageUrl(url))
+    getImage(defaultValues.image).then(({ url }) => setImageUrl(
+      new URL(url, import.meta.env.VITE_BACKEND_API_URL).href
+    ))
   }, [defaultValues?.image])
 
   return (
