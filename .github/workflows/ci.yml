@@ -70,5 +70,5 @@ jobs:
       - name: Send Telegram message
         uses: sarkiisov/platesmania-notifier@main
         with:
-          telegramBotToken: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          telegramChatId: ${{ secrets.TELEGRAM_CHAT_ID }}
+          telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          telegram-chat-id: ${{ secrets.TELEGRAM_CHAT_ID }}
