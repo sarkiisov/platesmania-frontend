@@ -68,7 +68,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Send Telegram message
-        uses: sarkiisov/platesmania-notifier@main
+        uses: sarkiisov/platesmania-notifier@test
         with:
           telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           telegram-chat-id: ${{ secrets.TELEGRAM_CHAT_ID }}
