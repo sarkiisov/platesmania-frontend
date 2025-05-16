@@ -59,12 +59,12 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
 
-  notify:
-    runs-on: ubuntu-latest
+  # notify:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Send Telegram message
-        uses: sarkiisov/platesmania-notifier
-        with:
-          telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          telegram-chat-id: ${{ secrets.TELEGRAM_CHAT_ID }}
+  #   steps:
+  #     - name: Send Telegram message
+  #       uses: sarkiisov/platesmania-notifier
+  #       with:
+  #         telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  #         telegram-chat-id: ${{ secrets.TELEGRAM_CHAT_ID }}
