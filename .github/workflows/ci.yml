@@ -60,3 +60,19 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    if: always()
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Send Telegram message
+        uses: sarkiisov/platesmania-notifier@main
+        with:
+          telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          telegram-chat-id: ${{ secrets.TELEGRAM_CHAT_ID }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
