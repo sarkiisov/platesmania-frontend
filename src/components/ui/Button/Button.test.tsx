@@ -29,7 +29,7 @@ describe('Button component', () => {
         Click Me
       </Button>
     )
-    const button = screen.getByText('Click Me')
+    const button = screen.getByText('Click Me+')
     fireEvent.click(button)
     expect(onClick).not.toHaveBeenCalled()
   })
