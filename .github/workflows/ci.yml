@@ -63,7 +63,7 @@ jobs:
 
   notify:
     runs-on: ubuntu-latest
-    needs: [build, test]
+    needs: [build, test, docker-push]
     if: always()
 
     steps:
