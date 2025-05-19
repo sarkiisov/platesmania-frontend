@@ -7,7 +7,7 @@ runs:
     - uses: pnpm/action-setup@v2
       with:
         version: 10.6.5
-        standalone: true
+        dest: ~/.pnpm-store
 
     - name: Install Node.js
       uses: actions/setup-node@v4
