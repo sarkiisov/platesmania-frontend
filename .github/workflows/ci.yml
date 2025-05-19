@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
@@ -23,7 +23,7 @@ jobs:
         run: pnpm build
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build
 
     steps:
@@ -37,7 +37,7 @@ jobs:
         run: pnpm test
 
   docker-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build, test]
     if: github.ref == 'refs/heads/main'
 
@@ -62,7 +62,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
 
   notify:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build, test, docker-push]
     if: always()
 
