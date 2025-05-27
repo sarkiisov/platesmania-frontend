@@ -8,14 +8,10 @@ export const GalleryLayout = () => {
 
   const [search, setSearch] = useState(searchParams.get('search') ?? '')
 
-  const setSearchQuery = useDebouncedCallback((value) => {
-    if (value) {
-      const nextSearchParams = new URLSearchParams(searchParams)
-      nextSearchParams.set('search', value)
-      setSearchParams(nextSearchParams)
-    } else {
-      setSearchParams(new URLSearchParams())
-    }
+  const setSearchQuery = useDebouncedCallback((value: string) => {
+    const nextSearchParams = new URLSearchParams(searchParams)
+    nextSearchParams.set('search', value)
+    setSearchParams(value ? nextSearchParams : new URLSearchParams())
   }, 1000)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

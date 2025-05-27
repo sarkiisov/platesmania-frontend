@@ -17,7 +17,9 @@ export const CardForm = ({ defaultValues, onSubmit, children }: CardFormProps) =
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>{children}</form>
+      <form onSubmit={form.handleSubmit(onSubmit)} data-testid="card-form">
+        {children}
+      </form>
     </FormProvider>
   )
 }
@@ -53,9 +55,9 @@ const CardFormBody = () => {
   useEffect(() => {
     if (!defaultValues?.image) return
 
-    getImage(defaultValues.image).then(({ url }) => setImageUrl(
-      new URL(url, import.meta.env.VITE_BACKEND_API_URL).href
-    ))
+    getImage(defaultValues.image).then(({ url }) =>
+      setImageUrl(new URL(url, import.meta.env.VITE_BACKEND_API_URL).href)
+    )
   }, [defaultValues?.image])
 
   return (

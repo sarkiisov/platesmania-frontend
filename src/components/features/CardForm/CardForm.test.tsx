@@ -1,15 +1,31 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { CardForm } from './CardForm'
-import { uploadImage } from '@/api'
+import * as api from '@/api'
+import { CardFormSchema } from './CardForm.schema'
 
-vi.mock('@/api', () => ({
-  uploadImage: vi.fn().mockResolvedValue({ id: 'mock-id', url: 'http://mock-url.com' }),
-  getImage: vi.fn().mockResolvedValue({ url: 'http://mock-url.com' })
+vi.mock('@/api')
+
+vi.mock('react-toastify', () => ({
+  toast: { error: vi.fn() }
 }))
 
 describe('CardForm component', () => {
   const onSubmit = vi.fn()
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('validates with correct input and lowercase plate', () => {
+    const input = {
+      plate: 'М777ММ77',
+      image: 'image_url'
+    }
+    const result = CardFormSchema.parse(input)
+    expect(result.plate).toBe('М777ММ77'.toLowerCase())
+    expect(result.image).toBe('image_url')
+  })
 
   it('renders the form correctly', () => {
     render(
@@ -60,6 +76,8 @@ describe('CardForm component', () => {
   })
 
   it('handles image upload correctly', async () => {
+    vi.mocked(api.uploadImage).mockResolvedValueOnce({ id: 'mock-id', url: 'http://mock-url.com' })
+
     render(
       <CardForm onSubmit={onSubmit}>
         <CardForm.Body />
@@ -78,7 +96,22 @@ describe('CardForm component', () => {
     await userEvent.upload(input, file)
 
     await waitFor(() => {
-      expect(uploadImage).toHaveBeenCalledWith(file)
+      expect(api.uploadImage).toHaveBeenCalledWith(file)
+    })
+  })
+
+  it('fetches image when defaultValues.image is missing', async () => {
+    vi.mocked(api.getImage).mockResolvedValueOnce({ id: 'mock-id', url: 'http://mock-url.com' })
+
+    render(
+      <CardForm defaultValues={{ image: 'mock-id' }} onSubmit={onSubmit}>
+        <CardForm.Body />
+        <CardForm.Actions />
+      </CardForm>
+    )
+
+    await waitFor(() => {
+      expect(api.getImage).toHaveBeenCalledWith('mock-id')
     })
   })
 })

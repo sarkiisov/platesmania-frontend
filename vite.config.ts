@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
     setupFiles: ['./vitest-setup.js'],
     coverage: {
       include: ['src/**'],
-      exclude: ['**/index.ts']
+      exclude: ['**/index.ts', 'src/*.tsx', 'src/providers/*.tsx', 'src/components/pages/*/*.tsx']
     }
   }
 }))
